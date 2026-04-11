@@ -1,37 +1,17 @@
-cmake_minimum_required(VERSION 3.8)
-project(destroyer)
+<?xml version="1.0"?>
 
-if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-add_compile_options(-Wall -Wextra -Wpedantic)
-endif()
+<package format="3">
+  <name>destroyer</name>
+  <version>0.0.0</version>
+  <description>Destroyer II ROS2 Package</description>
 
-# dependencies
+<maintainer email="you@example.com">farel</maintainer> <license>MIT</license>
 
-find_package(ament_cmake REQUIRED)
-find_package(rclcpp REQUIRED)
-find_package(std_msgs REQUIRED)
-find_package(geometry_msgs REQUIRED)
+<buildtool_depend>ament_cmake</buildtool_depend>
 
-include_directories(include)
+<depend>rclcpp</depend> <depend>std_msgs</depend> <depend>geometry_msgs</depend>
 
-add_executable(move_destroyer src/move_destroyer.cpp)
-ament_target_dependencies(move_destroyer rclcpp std_msgs geometry_msgs)
-
-add_executable(auto_mode_destroyer src/auto_mode_destroyer.cpp)
-ament_target_dependencies(auto_mode_destroyer rclcpp geometry_msgs)
-
-add_executable(drive_mode_destroyer src/drive_mode_destroyer.cpp)
-ament_target_dependencies(drive_mode_destroyer rclcpp geometry_msgs)
-
-add_executable(check_move_destroyer src/check_move_destroyer.cpp)
-ament_target_dependencies(check_move_destroyer rclcpp std_msgs geometry_msgs)
-
-install(TARGETS
-move_destroyer
-auto_mode_destroyer
-drive_mode_destroyer
-check_move_destroyer
-DESTINATION lib/${PROJECT_NAME}
-)
-
-ament_package()
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
