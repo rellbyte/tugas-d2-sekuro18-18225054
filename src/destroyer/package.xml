@@ -1,22 +1,37 @@
-<?xml version="1.0"?>
-<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
-<package format="3">
-  <name>destroyer</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="root@todo.todo">root</maintainer>
-  <license>TODO: License declaration</license>
+cmake_minimum_required(VERSION 3.8)
+project(destroyer)
 
-  <buildtool_depend>ament_cmake</buildtool_depend>
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
-  <depend>rclcpp</depend>
-  <depend>std_msgs</depend>
-  <depend>geometry_msgs</depend>
+# dependencies
 
-  <test_depend>ament_lint_auto</test_depend>
-  <test_depend>ament_lint_common</test_depend>
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
-  <export>
-    <build_type>ament_cmake</build_type>
-  </export>
-</package>
+include_directories(include)
+
+add_executable(move_destroyer src/move_destroyer.cpp)
+ament_target_dependencies(move_destroyer rclcpp std_msgs geometry_msgs)
+
+add_executable(auto_mode_destroyer src/auto_mode_destroyer.cpp)
+ament_target_dependencies(auto_mode_destroyer rclcpp geometry_msgs)
+
+add_executable(drive_mode_destroyer src/drive_mode_destroyer.cpp)
+ament_target_dependencies(drive_mode_destroyer rclcpp geometry_msgs)
+
+add_executable(check_move_destroyer src/check_move_destroyer.cpp)
+ament_target_dependencies(check_move_destroyer rclcpp std_msgs geometry_msgs)
+
+install(TARGETS
+move_destroyer
+auto_mode_destroyer
+drive_mode_destroyer
+check_move_destroyer
+DESTINATION lib/${PROJECT_NAME}
+)
+
+ament_package()
