@@ -5,7 +5,7 @@
   <version>0.0.0</version>
   <description>Destroyer II ROS2 Package</description>
 
-<maintainer email="you@example.com">farel</maintainer> <license>MIT</license>
+<maintainer email="farelathaya2020@gmail.com">farel</maintainer> <license>MIT</license>
 
 <buildtool_depend>ament_cmake</buildtool_depend>
 
